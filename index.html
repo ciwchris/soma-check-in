@@ -1,0 +1,65 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Soma counts</title>
+</head>
+<script>
+    setInterval(getCounts, 30000);
+
+    function getCounts() {
+        fetch('https://soma-check-in.azurewebsites.net/api/LocationCounts', {
+            headers:
+                { "Access-Control-Allow-Origin": "https://soma-check-in.azurewebsites.net" }
+        })
+            .then(function (response) {
+                var contentType = response.headers.get("content-type");
+                if (contentType && contentType.includes("application/json")) {
+                    response.json().then(function (content) {
+                        for (var i = 0; i < content.length; i++) {
+                            if (/Red\W/.test(content[i].name)) {
+                                document.getElementById("red").textContent = 'Red - 6-24mo: ' + content[i].count + '/' + content[i].limit;
+                            }
+                            if (/Orange\W/.test(content[i].name)) {
+                                document.getElementById("orange").textContent = "Orange - 2's & 3's: " + content[i].count + '/' + content[i].limit;
+                            }
+                            if (/Yellow\W/.test(content[i].name)) {
+                                document.getElementById("yellow").textContent = "Yellow - 4's & 5's: " + content[i].count + '/' + content[i].limit;
+                            }
+                            if (/Green\W/.test(content[i].name)) {
+                                document.getElementById("green").textContent = 'Green - Elementary I: ' + content[i].count + '/' + content[i].limit;
+                            }
+                            if (/Blue\W/.test(content[i].name)) {
+                                document.getElementById("blue").textContent = 'Blue - Elementary II: ' + content[i].count + '/' + content[i].limit;
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+</script>
+
+<body>
+    <p id="red">
+        Red - 6-24mo
+    </p>
+    <p id="orange">
+        Orange - 2's & 3's
+    </p>
+    <p id="yellow">
+        Yellow - 4's & 5's
+    </p>
+    <p id="green">
+        Green - Elementary I
+    </p>
+    <p id="blue">
+        Blue - Elementary II
+    </p>
+</body>
+
+</html>
