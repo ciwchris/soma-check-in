@@ -5,10 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Soma counts</title>
+    <style>
+        .class-outer {
+            border-radius: 10px;
+            min-height: 2rem;
+            display: grid;
+            grid-template-columns: 0% 1fr;
+            width: 100%;
+            border: solid 1px
+        }
+
+        .progress {
+            border-radius: 10px
+        }
+
+        .count {
+            text-align: center;
+            font-size: 1.6rem
+        }
+    </style>
 </head>
 <script>
     getCounts();
-    setInterval(getCounts, 30000);
+    // setInterval(getCounts, 30000);
+
+    function updateClassStatus(max, count, progressEle, countEle) {
+        var percentage = Math.floor(count / max * 100);
+        if (percentage > 100) percentage = 100;
+        progressEle.style['grid-template-columns'] = `${percentage}% 1fr`
+
+        var availability = max > count ? max - count : '';
+        countEle.textContent = availability;
+    }
 
     function getCounts() {
         fetch('https://soma-check-in.azurewebsites.net/api/LocationCounts', {
@@ -21,19 +49,19 @@
                     response.json().then(function (content) {
                         for (var i = 0; i < content.length; i++) {
                             if (/Red\W/.test(content[i].name)) {
-                                document.getElementById("red").textContent = 'Red - 6-24mo: ' + content[i].count + '/' + content[i].limit;
+                                updateClassStatus(content[i].limit, content[i].count, document.getElementById("red-bar"), document.getElementById("red-count"));
                             }
                             if (/Orange\W/.test(content[i].name)) {
-                                document.getElementById("orange").textContent = "Orange - 2's & 3's: " + content[i].count + '/' + content[i].limit;
+                                updateClassStatus(content[i].limit, content[i].count, document.getElementById("orange-bar"), document.getElementById("orange-count"));
                             }
                             if (/Yellow\W/.test(content[i].name)) {
-                                document.getElementById("yellow").textContent = "Yellow - 4's & 5's: " + content[i].count + '/' + content[i].limit;
+                                updateClassStatus(content[i].limit, content[i].count, document.getElementById("yellow-bar"), document.getElementById("yellow-count"));
                             }
                             if (/Green\W/.test(content[i].name)) {
-                                document.getElementById("green").textContent = 'Green - Elementary I: ' + content[i].count + '/' + content[i].limit;
+                                updateClassStatus(content[i].limit, content[i].count, document.getElementById("green-bar"), document.getElementById("green-count"));
                             }
                             if (/Blue\W/.test(content[i].name)) {
-                                document.getElementById("blue").textContent = 'Blue - Elementary II: ' + content[i].count + '/' + content[i].limit;
+                                updateClassStatus(content[i].limit, content[i].count, document.getElementById("blue-bar"), document.getElementById("blue-count"));
                             }
                         }
                     });
@@ -46,20 +74,35 @@
 </script>
 
 <body>
-    <p id="red">
-        Red - 6-24mo
+    <p>
+        <div id="red-bar" style="border-color: red;" class="class-outer">
+            <div style=" background-color: red;" class="progress"></div>
+            <div id="red-count" style="color: red;" class="count"></div>
+        </div>
     </p>
-    <p id="orange">
-        Orange - 2's & 3's
+    <p>
+        <div id="orange-bar" style="border-color: orange;" class="class-outer">
+            <div style=" background-color: orange;" class="progress"></div>
+            <div id="orange-count" style="color: orange;" class="count"></div>
+        </div>
     </p>
-    <p id="yellow">
-        Yellow - 4's & 5's
+    <p>
+        <div id="yellow-bar" style="border-color: yellow;" class="class-outer">
+            <div style=" background-color: yellow;" class="progress"></div>
+            <div id="yellow-count" style="color: yellow;" class="count"></div>
+        </div>
     </p>
-    <p id="green">
-        Green - Elementary I
+    <p>
+        <div id="green-bar" style="border-color: green;" class="class-outer">
+            <div style=" background-color: green;" class="progress"></div>
+            <div id="green-count" style="color: green;" class="count"></div>
+        </div>
     </p>
-    <p id="blue">
-        Blue - Elementary II
+    <p>
+        <div id="blue-bar" style="border-color: blue;" class="class-outer">
+            <div style=" background-color: blue;" class="progress"></div>
+            <div id="blue-count" style="color: blue;" class="count"></div>
+        </div>
     </p>
 </body>
 
