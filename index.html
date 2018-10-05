@@ -8,7 +8,8 @@
     <style>
         .class-outer {
             border-radius: 10px;
-            min-height: 2rem;
+            min-height: 3rem;
+            line-height: 3rem;
             display: grid;
             grid-template-columns: 0% 1fr;
             width: 100%;
@@ -21,7 +22,17 @@
 
         .count {
             text-align: center;
-            font-size: 1.6rem
+            font-size: 2rem
+        }
+
+        @media screen and (max-width:800px) {
+            .count {
+                font-size: 2.6rem
+            }
+            .class-outer {
+                min-height: 4rem;
+                line-height: 4rem;
+            }
         }
     </style>
 </head>
