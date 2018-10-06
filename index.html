@@ -37,9 +37,6 @@
     </style>
 </head>
 <script>
-    getCounts();
-    // setInterval(getCounts, 30000);
-
     function updateClassStatus(max, count, progressEle, countEle) {
         var percentage = Math.floor(count / max * 100);
         if (percentage > 100) percentage = 100;
@@ -82,37 +79,79 @@
                 console.log(error);
             });
     }
+    setInterval(timer, 3000);
+
+    var timerCount = 1;
+    var colorIndex = 0;
+    var colors = ['red', 'orange', 'yellow', 'green', 'blue'];
+    function timer() {
+        if (timerCount > 12) {
+            getCounts();
+            colorIndex = (colorIndex + 1) % colors.length;
+            var color = colors[colorIndex];
+            for (timerCount; timerCount > 1; timerCount--) {
+                var ele = document.querySelector('#timer' + (timerCount - 1));
+                ele.setAttribute("fill", "transparent");
+                ele.setAttribute("stroke", color);
+            }
+        } else {
+            document.querySelector('#timer' + timerCount).setAttribute("fill", colors[colorIndex]);
+            timerCount++;
+        }
+    }
 </script>
 
-<body>
+<body style="text-align: center">
+
+    <div style="width:100%">
+        <svg width="75" height="55">
+            <def>
+                <g id="Timer">
+                    <rect transform="translate(50 10)" width="4" height="10" rx="2" ry="2" stroke-width="1" />
+                </g>
+            </def>
+            <use href="#Timer" fill="transparent" id="timer1" stroke="red" />
+            <use href="#Timer" fill="transparent" id="timer2" stroke="red" transform="translate(10 4) rotate(30 52 10) " />
+            <use href="#Timer" fill="transparent" id="timer3" stroke="red" transform="translate(18 12) rotate(60 52 10) " />
+            <use href="#Timer" fill="transparent" id="timer4" stroke="red" transform="translate(22 22) rotate(90 52 10) " />
+            <use href="#Timer" fill="transparent" id="timer5" stroke="red" transform="translate(18 32) rotate(120 52 10) " />
+            <use href="#Timer" fill="transparent" id="timer6" stroke="red" transform="translate(10 39) rotate(150 52 10) " />
+            <use href="#Timer" fill="transparent" id="timer7" stroke="red" transform="translate(0 44) rotate(180 52 10) " />
+            <use href="#Timer" fill="transparent" id="timer8" stroke="red" transform="translate(-10 39) rotate(210 52 10) " />
+            <use href="#Timer" fill="transparent" id="timer9" stroke="red" transform="translate(-18 32) rotate(240 52 10) " />
+            <use href="#Timer" fill="transparent" id="timer10" stroke="red" transform="translate(-22 22) rotate(270 52 10) " />
+            <use href="#Timer" fill="transparent" id="timer11" stroke="red" transform="translate(-18 12) rotate(300 52 10) " />
+            <use href="#Timer" fill="transparent" id="timer12" stroke="red" transform="translate(-10 4) rotate(330 52 10) " />
+        </svg>
+    </div>
     <p>
-        <div id="red-bar" style="border-color: red;" class="class-outer">
-            <div style=" background-color: red;" class="progress"></div>
-            <div id="red-count" style="color: red;" class="count"></div>
+        <div id="red-bar " style="border-color: red; " class="class-outer ">
+            <div style=" background-color: red; " class="progress "></div>
+            <div id="red-count " style="color: red; " class="count "></div>
         </div>
     </p>
     <p>
-        <div id="orange-bar" style="border-color: orange;" class="class-outer">
-            <div style=" background-color: orange;" class="progress"></div>
-            <div id="orange-count" style="color: orange;" class="count"></div>
+        <div id="orange-bar " style="border-color: orange; " class="class-outer ">
+            <div style=" background-color: orange; " class="progress "></div>
+            <div id="orange-count " style="color: orange; " class="count "></div>
         </div>
     </p>
     <p>
-        <div id="yellow-bar" style="border-color: yellow;" class="class-outer">
-            <div style=" background-color: yellow;" class="progress"></div>
-            <div id="yellow-count" style="color: yellow;" class="count"></div>
+        <div id="yellow-bar " style="border-color: yellow; " class="class-outer ">
+            <div style=" background-color: yellow; " class="progress "></div>
+            <div id="yellow-count " style="color: yellow; " class="count "></div>
         </div>
     </p>
     <p>
-        <div id="green-bar" style="border-color: green;" class="class-outer">
-            <div style=" background-color: green;" class="progress"></div>
-            <div id="green-count" style="color: green;" class="count"></div>
+        <div id="green-bar " style="border-color: green; " class="class-outer ">
+            <div style=" background-color: green; " class="progress "></div>
+            <div id="green-count " style="color: green; " class="count "></div>
         </div>
     </p>
     <p>
-        <div id="blue-bar" style="border-color: blue;" class="class-outer">
-            <div style=" background-color: blue;" class="progress"></div>
-            <div id="blue-count" style="color: blue;" class="count"></div>
+        <div id="blue-bar " style="border-color: blue; " class="class-outer ">
+            <div style=" background-color: blue; " class="progress "></div>
+            <div id="blue-count " style="color: blue; " class="count "></div>
         </div>
     </p>
 </body>
