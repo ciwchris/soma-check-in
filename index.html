@@ -109,14 +109,15 @@
 
     var timerCount = 0;
     var colorIndex = 0;
-    var colors = ['red', 'orange', 'yellow', 'green', 'blue'];
+    var colors = ['red', 'orange', '#ffe623', 'green', 'blue'];
     function timer() {
         if (timerCount >= 10) {
             getCounts();
             timerCount--;
-            for (timerCount; timerCount >= 1; timerCount--) {
+            for (timerCount; timerCount >= 0; timerCount--) {
                 document.querySelector('#progress-grid').children[timerCount].style.backgroundColor = "inherit";
             }
+            timerCount = 0;
         } else {
             document.querySelector('#progress-grid').children[timerCount].style.backgroundColor = colors[colorIndex];
             colorIndex = (colorIndex + 1) % colors.length;
@@ -129,12 +130,12 @@
     <div id="progress-grid">
         <div style="border-color: red"></div>
         <div style="border-color: orange"></div>
-        <div style="border-color: yellow"></div>
+        <div style="border-color: #ffe623"></div>
         <div style="border-color: green"></div>
         <div style="border-color: blue"></div>
         <div style="border-color: red"></div>
         <div style="border-color: orange"></div>
-        <div style="border-color: yellow"></div>
+        <div style="border-color: #ffe623"></div>
         <div style="border-color: green"></div>
         <div style="border-color: blue"></div>
     </div>
@@ -152,9 +153,9 @@
         </div>
     </p>
     <p>
-        <div id="yellow-bar" style="border-color: yellow; " class="class-outer">
-            <div style=" background-color: yellow; " class="progress "></div>
-            <div id="yellow-count" style="color: yellow; " class="count "></div>
+        <div id="yellow-bar" style="border-color: #ffe623; " class="class-outer">
+            <div style=" background-color: #ffe623; " class="progress "></div>
+            <div id="yellow-count" style="color: #ffe623; " class="count "></div>
         </div>
     </p>
     <p>
