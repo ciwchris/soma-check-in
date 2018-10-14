@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Classroom availability for Soma check ins.">
+
+    <link rel="apple-touch-icon" sizes="152x152" href="/soma-check-in/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/soma-check-in/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/soma-check-in/favicon-16x16.png">
+    <link rel="manifest" href="/soma-check-in/manifest.json">
+    <link rel="mask-icon" href="/soma-check-in/safari-pinned-tab.svg" color="#9f8e6d">
+    <link rel="shortcut icon" href="/soma-check-in/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="Soma Check Ins">
+    <meta name="application-name" content="Soma Check Ins">
+    <meta name="msapplication-TileColor" content="#9f8e6d">
+    <meta name="msapplication-config" content="/soma-check-in/browserconfig.xml">
+    <meta name="theme-color" content="#9f8e6d">
+
+    <link rel="stylesheet" type="text/css" href="main.min.css">
+
+    <title>Soma Check In Count</title>
+</head>
+
+<body style="text-align: center">
+    <noscript>
+        <p style="text-align: center">
+            To retrieve Check In Count JavaScript must be enabled
+        </p>
+    </noscript>
+
+    <div id="progress-grid">
+        <div style="border-color: red"></div>
+        <div style="border-color: orange"></div>
+        <div style="border-color: #ffe623"></div>
+        <div style="border-color: green"></div>
+        <div style="border-color: blue"></div>
+        <div style="border-color: red"></div>
+        <div style="border-color: orange"></div>
+        <div style="border-color: #ffe623"></div>
+        <div style="border-color: green"></div>
+        <div style="border-color: blue"></div>
+    </div>
+
+    <p>
+        <div id="red-bar" style="border-color: red" class="class-outer">
+            <div style=" background-color: red" class="progress"></div>
+            <div id="red-count" style="color: red" class="count"></div>
+        </div>
+    </p>
+    <p>
+        <div id="orange-bar" style="border-color: orange" class="class-outer">
+            <div style=" background-color: orange" class="progress"></div>
+            <div id="orange-count" style="color: orange" class="count"></div>
+        </div>
+    </p>
+    <p>
+        <div id="yellow-bar" style="border-color: #ffe623" class="class-outer">
+            <div style=" background-color: #ffe623" class="progress"></div>
+            <div id="yellow-count" style="color: #ffe623" class="count"></div>
+        </div>
+    </p>
+    <p>
+        <div id="green-bar" style="border-color: green" class="class-outer">
+            <div style=" background-color: green" class="progress"></div>
+            <div id="green-count" style="color: green" class="count"></div>
+        </div>
+    </p>
+    <p>
+        <div id="blue-bar" style="border-color: blue" class="class-outer">
+            <div style=" background-color: blue" class="progress"></div>
+            <div id="blue-count" style="color: blue" class="count"></div>
+        </div>
+    </p>
+
+    <script type="text/javascript" src="app.min.js"></script>
+</body>
+
+</html>

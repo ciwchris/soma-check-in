@@ -24,10 +24,6 @@ self.__precacheManifest = [
     "revision": "1f851c3b114b0e87530280ef1675c9e8"
   },
   {
-    "url": "app.js",
-    "revision": "68c0e522d73fc95ce2f745b330ee14e5"
-  },
-  {
     "url": "app.min.js",
     "revision": "a65797caaa9e526c1c374ca1bf482090"
   },
@@ -96,20 +92,8 @@ self.__precacheManifest = [
     "revision": "8b56e12fd9474819015f814bde2db970"
   },
   {
-    "url": "package-lock.json",
-    "revision": "7152bf1e1e2e55e15a3be1b4fe6a6413"
-  },
-  {
-    "url": "package.json",
-    "revision": "a05c4557f4eabb58abece8b4c991a6f2"
-  },
-  {
     "url": "safari-pinned-tab.svg",
     "revision": "5ad30cc8bf98858607985af417b0a882"
-  },
-  {
-    "url": "workbox-config.js",
-    "revision": "8cec134d60e5cfddb0377cc867b32136"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();

@@ -1,5 +1,5 @@
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/soma-check-in/sw.min.js', { scope: '/soma-check-in/' }).then(function(reg) {
+  navigator.serviceWorker.register('/soma-check-in/sw.js', { scope: '/soma-check-in/' }).then(function(reg) {
 
     if(reg.installing) {
       console.log('Service worker installing');
