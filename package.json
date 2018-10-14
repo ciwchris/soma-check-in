@@ -1,0 +1,26 @@
+{
+  "name": "soma-check-in",
+  "version": "1.0.0",
+  "description": "Soma Classroom Check In Avability Counts",
+  "scripts": {
+    "build": "npm run sw && npm run minify:js -s && npm run minify:css -s",
+    "minify:js": "uglifyjs --compress --mangle -o app.min.js -- app.js && uglifyjs --compress --mangle -o sw.min.js -- sw.js",
+    "minify:css": "cleancss main.css -o main.min.css",
+    "sw": "workbox generateSW workbox-config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ciwchris/soma-check-in.git"
+  },
+  "author": "ciwchris",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ciwchris/soma-check-in/issues"
+  },
+  "homepage": "https://github.com/ciwchris/soma-check-in#readme",
+  "devDependencies": {
+    "clean-css-cli": "^4.2.1",
+    "uglify-es": "^3.3.9",
+    "workbox-cli": "^3.6.2"
+  }
+}

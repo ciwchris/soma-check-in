@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Classroom availability for Soma check ins.">
 
-
     <link rel="apple-touch-icon" sizes="152x152" href="/soma-check-in/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/soma-check-in/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/soma-check-in/favicon-16x16.png">
@@ -20,145 +19,10 @@
     <meta name="msapplication-config" content="/soma-check-in/browserconfig.xml">
     <meta name="theme-color" content="#9f8e6d">
 
+    <link rel="stylesheet" type="text/css" href="main.min.css">
+
     <title>Soma Check In Count</title>
-    <style>
-        #progress-grid {
-            height: 10px;
-            display: grid;
-            grid-template-areas: "a a a a a a a a a a";
-            grid-gap: 10px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            padding-top: 2rem;
-            padding-bottom: 3rem;
-        }
-
-        #progress-grid>div {
-            border: solid 1px;
-            border-radius: 5px;
-        }
-
-        .class-outer {
-            border-radius: 10px;
-            min-height: 3rem;
-            line-height: 3rem;
-            display: grid;
-            grid-template-columns: 0% 1fr;
-            width: 100%;
-            border: solid 1px
-        }
-
-        .progress {
-            border-radius: 10px
-        }
-
-        .count {
-            text-align: center;
-            font-size: 2rem
-        }
-
-        @media screen and (max-width:800px) {
-            .count {
-                font-size: 2.6rem
-            }
-            .class-outer {
-                min-height: 4rem;
-                line-height: 4rem;
-            }
-
-            #progress-grid {
-                padding-top: 1rem;
-                padding-bottom: 2rem;
-            }
-        }
-    </style>
 </head>
-<script>
-
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/soma-check-in/sw.js', { scope: '/soma-check-in/' }).then(function(reg) {
-
-        if(reg.installing) {
-          console.log('Service worker installing');
-        } else if(reg.waiting) {
-          console.log('Service worker installed');
-        } else if(reg.active) {
-          console.log('Service worker active');
-        }
-
-      }).catch(function(error) {
-        // registration failed
-        console.log('Registration failed with ' + error);
-      });
-    }
-
-    function updateClassStatus(max, count, color) {
-        var percentage = Math.floor(count / max * 100);
-        if (percentage > 100) percentage = 100;
-        document.getElementById(color + "-bar").style['grid-template-columns'] = `${percentage}% 1fr`
-
-        var availability = max > count ? max - count : '';
-        document.getElementById(color + "-count").textContent = availability;
-    }
-
-    function getCounts() {
-        fetch('https://soma-check-in.azurewebsites.net/api/LocationCounts', {
-            headers:
-                { "Access-Control-Allow-Origin": "https://soma-check-in.azurewebsites.net" }
-        })
-            .then(function (response) {
-                var contentType = response.headers.get("content-type");
-                if (contentType && contentType.includes("application/json")) {
-                    response.json().then(function (content) {
-                        for (var i = 0; i < content.length; i++) {
-                            if (/Red\W/.test(content[i].name)) {
-                                updateClassStatus(content[i].limit, content[i].count, 'red');
-                            }
-                            if (/Orange\W/.test(content[i].name)) {
-                                updateClassStatus(content[i].limit, content[i].count, 'orange');
-                            }
-                            if (/Yellow\W/.test(content[i].name)) {
-                                updateClassStatus(content[i].limit, content[i].count, 'yellow');
-                            }
-                            if (/Green\W/.test(content[i].name)) {
-                                updateClassStatus(content[i].limit, content[i].count, 'green');
-                            }
-                            if (/Blue\W/.test(content[i].name)) {
-                                updateClassStatus(content[i].limit, content[i].count, 'blue');
-                            }
-                        }
-                    });
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-    }
-
-    getCounts();
-    setTimeout(function () {
-        setInterval(timer, 3000);
-    }, 1000)
-
-    var timerCount = 0;
-    var colorIndex = 0;
-    var colors = ['red', 'orange', '#ffe623', 'green', 'blue'];
-    function timer() {
-        if (timerCount >= 10) {
-            getCounts();
-            timerCount--;
-            for (timerCount; timerCount >= 0; timerCount--) {
-                document.querySelector('#progress-grid').children[timerCount].style.backgroundColor = "inherit";
-            }
-            timerCount = 0;
-        } else {
-            document.querySelector('#progress-grid').children[timerCount].style.backgroundColor = colors[colorIndex];
-            colorIndex = (colorIndex + 1) % colors.length;
-            timerCount++;
-        }
-    }
-</script>
 
 <body style="text-align: center">
     <noscript>
@@ -210,6 +74,8 @@
             <div id="blue-count" style="color: blue" class="count"></div>
         </div>
     </p>
+
+    <script type="text/javascript" src="app.min.js"></script>
 </body>
 
 </html>

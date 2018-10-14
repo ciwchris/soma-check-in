@@ -1,0 +1,50 @@
+#progress-grid {
+    height: 10px;
+    display: grid;
+    grid-template-areas: "a a a a a a a a a a";
+    grid-gap: 10px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+#progress-grid>div {
+    border: solid 1px;
+    border-radius: 5px;
+}
+
+.class-outer {
+    border-radius: 10px;
+    min-height: 3rem;
+    line-height: 3rem;
+    display: grid;
+    grid-template-columns: 0% 1fr;
+    width: 100%;
+    border: solid 1px
+}
+
+.progress {
+    border-radius: 10px
+}
+
+.count {
+    text-align: center;
+    font-size: 2rem
+}
+
+@media screen and (max-width:800px) {
+    .count {
+        font-size: 2.6rem
+    }
+    .class-outer {
+        min-height: 4rem;
+        line-height: 4rem;
+    }
+
+    #progress-grid {
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+    }
+}
